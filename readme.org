@@ -1,0 +1,8 @@
+#+title: Readme
+
+#+begin_quote
+从 这里 抄了五笔的配置，根据自己需要进行了精简
+[[https://github.com/KyleBing/rime-wubi86-jidian/tree/master]]
+#+end_quote
+
+把本仓库的文件, 放到 ~/Library/Rime/ 目录下, 部署安装即可.
