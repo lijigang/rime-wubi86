@@ -8,7 +8,6 @@ patch:
     - schema: wubi86_jidian             # 五笔
     - schema: pinyin_simp               # 普通拼音
 
-
   # Menu
   menu:
     page_size: 3                    # 候选词数量，最多支持 10 个
@@ -16,8 +15,8 @@ patch:
     hotkeys:        # 弹出菜单的快捷键
       - "Control+0"
     abbreviate_options: true
-    caption: "【 输入法设置 】"
-    option_list_separator: "｜"
+    save_options:
+      - half_shape
 
   #-----------------------------------------------
   # 中英文切换自定义
@@ -36,15 +35,11 @@ patch:
       Control_L: noop
       Control_R: noop
 
-
   key_binder:
     bindings:
       # 上下翻页 [ ]
       - { when: has_menu, accept: bracketleft, send: Page_Up }
       - { when: has_menu, accept: bracketright, send: Page_Down }
-
-      # 回车清码
-#      - { when: composing, accept: Return, send: Escape }
 
       # emacs key bindings, copy from https://github.com/rime/rime-prelude/blob/master/key_bindings.yaml
       - { when: composing, accept: Control+p, send: Up }
@@ -60,11 +55,10 @@ patch:
       - { when: composing, accept: Control+bracketleft, send: Escape }
 
   punctuator:
-    full_shape: # 全角符号
-      " ": {commit: "　"}
+    half_shape: #半角符号
       "!": {commit: "！"}
       "\"": {pair: ["“", "”"]}
-      "#": ["＃", "⌘"]
+      "#": "#"
       "$": "￥"
       "%": "％"
       "&": "＆"
@@ -87,45 +81,13 @@ patch:
       "[": ["「", "【", "〔", "［"]
       "\\": ["、", "＼"]
       "]": ["」", "】", "〕", "］"]
-      "^": {commit: "……"}
-      _: "——"
-      "`": "｀"
-      "{": ["『", "〖", "｛"]
-      "|": ["·", "｜", "§", "¦"]
-      "}": ["』", "〗", "｝"]
-      "~": "～"
-    half_shape: # 半角符号
-      "!": {commit: "!"}
-      "#": "#"
-      "$": "$"
-      "%": "%"
-      "&": "&"
-      "\"": {commit: "\""}
-      "'": {commit: "'"}
-      "(": "("
-      ")": ")"
-      "*": "*"
-      "+": "+"
-      ",": {commit: ","}
-      "-": {commit: "-"}
-      .: {commit: "."}
-      "/": {commit: "/"}
-      ":": {commit: ":"}
-      ";": {commit: ";"}
-      "<": {commit: "<"}
-      "=": {commit: "="}
-      ">": {commit: ">"}
-      "?": {commit: "?"}
-      "@": "@"
-      "[": {commit: "["}
-      "]": {commit: "]"}
       "^": {commit: "^"}
       _: "_"
-      "`": "`"
-      "{": "{"
-      "|": "|"
-      "}": "}"
-      "~": "~"
+      "`": "｀"
+      "{": ["『", "〖", "｛"]
+      "|": ["｜", "§", "¦"]
+      "}": ["』", "〗", "｝"]
+      "~": "～"
   recognizer:
     patterns:  # 一些常见的英文组合，当正则匹配到这些时，都不会生成候选词，而只输入英文
       email: "^[-_.0-9A-Za-z]+@.*$"
